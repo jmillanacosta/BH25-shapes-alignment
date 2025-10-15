@@ -1,72 +1,206 @@
 ---
-title: 'DBCLS BioHackathon 2025 report: Template for the very long title'
-title_short: 'BioHackJP25: How we found breakfast'
+title: 'DBCLS BioHackathon 2025 report: Towards Systematic Matching of RDF Life Sciences Databases through Automatically Extracted Schemas'
+title_short: 'BioHackJP25:shapes-alignment'
 tags:
   - Semantic web
-  - Ontologies
-  - Workflows
+  - RDF Schemas
+  - Shape Expressions
+  - Schema Matching
+  - SPARQL
+  - Interoperability
 authors:
-  - name: First Author
+  - name: Javier Millán Acosta
     affiliation: 1
+    orcid:0000-0001-5608-781X
   - name: Last Author
     orcid: 0000-0000-0000-0000
     affiliation: 2
 affiliations:
-  - name: First Affiliation
+  - name: Department of Translational Genomics, Maastricht University, Maastricht, The Netherlands
     index: 1
-  - name: ELIXIR Europe
-    ror: 044rwnt51
-    index: 2
+    ror: 02jz4aj89
 date: 15 September 2025
 cito-bibliography: paper.bib
 event: BH25JP
 biohackathon_name: "DBCLS BioHackathon 2025"
 biohackathon_url:   "https://2025.biohackathon.org/"
 biohackathon_location: "Mie, Japan, 2025"
-group: YOUR-PROJECT-NAME-GOES-HERE
+group: shapes-alignment
 # URL to project git repo --- should contain the actual paper.md:
-git_url: https://github.com/biohackathon-japan/bh25-bhxiv-template
+git_url: https://github.com/biohackathon-japan/BH25-shapes-alignment
 # This is the short authors description that is used at the
 # bottom of the generated paper (typically the first two authors):
-authors_short: First Author \emph{et al.}
+authors_short: Millán Acosta \emph{et al.}
 ---
+# Abstract
 
-# Introduction
-
-As part of the DBCLS BioHackathon 2025, we here report...
+Life sciences databases can be exposed in RDF to Even if the underlying ontologies are shared, different Resource Description Framework (RDF) resources present
+As part of the DBCLS BioHackathon 2025, we here report our work on a methodology to systematically retrieve Shape Expressions from different RDF resources to describe their actual abstract syntax and match them to compare the similarity of their structures. This allows to identify gaps and opportunities for the interoperability of different RDF resources and facilitate data integration tasks like data retrieval via federated SPARQL querying across different triplestore databases and the continuous integration of asyncronously developed RDF graph resources.
 
 ## Author information
 
-Information about the authors is given in the [YAML](https://en.wikipedia.org/wiki/YAML) format at the top of this template.
-For authors you provide their names, their affiliations, and ideally their [ORCID](https://orcid.org/)
-identifier. For affiliations, the [Research Organization Registry](https://ror.org/) (ROR) identifier can be given.
-For example, this is the author information for this template:
+# Introduction
 
-```yaml
-authors:
-  - name: First Author
-    affiliation: 1
-  - name: Last Author
-    orcid: 0000-0000-0000-0000
-    affiliation: 2
-affiliations:
-  - name: First Affiliation
-    index: 1
-  - name: ELIXIR Europe
-    ror: 044rwnt51
-    index: 2
+Shape languages guide RDF resource authoring and integration through the prescription of the conditions required to validate them in terms of their abstract structural components or abstract syntax. The Shapes Constraint Language (SHACL) and Shape Expressions (ShEx) language both use sets of constraints to formally express the topology of RDF nodes and their properties in RDF data [@citesAsAuthority:shaclSpec;@citesAsAuthority:shexSpec]. While they use different syntax and expressivity, they are broadly intertranslatable for high-level schema matching tasks [@obtainsSupportFrom:commonFoundations].
+
+However, the adoption of shape languages in the life sciences RDF resources landscape is still limited: shape languages are not yet part of the standard development and maintenance workflows of most RDF resources in the life sciences domain, which hinders their interoperability and integration.
+
+The main challenges in RDF schema matching and interoperability can be categorized into two key areas:
+
+**Consistency**: How reliably do  a particular shape pattern appear across an RDF graph? This relates to the trustworthiness and consistency scores associated with automatically extracted shapes.
+
+**Alignment**: How similar are shapes between different RDF resources? This addresses the identification of common design patterns and structural similarities across databases. The main challenge is detecting and quantifying these design patterns to enable meaningful comparison and integration between heterogeneous RDF sources.
+
+In the recent years, some work has addressed the automatic generation of shapes and shape expressions [rdf-config, shexer, more refs] to formalize the actual structure of a dataset even if shapes validation is not part of its development or maintenance workflows, which opens possibilities to retrieve shape schemas in automated workflows for continuous integration tasks.
+
+Discuss work below shortly:
+
+- sheXer paper  [@citesAsDataSource:shexer] explains the algorithm and python implementation to mine RDF graphs for their shape expressions.
+- ELIXIR and Japan BioHackathon: 
+ - [@citesAsRelated:bh23Integration]:
+ - [@citesAsRelated:bh23Enhancement]:
+ - [@citesAsRelated:bh24Toward]:
+ - [@citesAsRelated:bh24Discovered]:
+
+
+# Shape Expression comparison
+Steps:
+- Map namespaces and ontology IRIs in RDFPortal (Yasunori's work)
+- Add feature to sheXer to serialize machine-readable trustworthiness scores for node and triples constraints
+- Extract shapes with sheXer
+- Add feature to rudof to compare the intersection of two shapes and return a similarity score
+- Apply to use cases
+- analyze results
+
+
+## Challenges
+
+-
+- ebi xref restful api (Renato): 
+
+# Use cases
+
+## EBI pathways and uniprot proteins --> No sparql for reactome
+
+## diseases in MESH, OMIM <-- pubchem <-- uniprot
+
+ebisearch, diff domains . Links between domains --> 
+
+PRIDE RDF
+
+## Pubchem and SIB around Protein, cross-domain aspects: 
+
+https://pubchem.ncbi.nlm.nih.gov/docs/rdf-federated-query#
+
+- UniProt
+
+- 
+
+## MESH and PubChem RDF
+
+```
+- PubChemInchiKey inchikey:AAAHDTMMJGSHKG-UHFFFAOYSA-N:
+  ## pc_inchikey_type_*.ttl
+  - a: sio:CHEMINF_000399  # InChIKey generated by software version 1.0.4
+  ## pc_inchikey_value_*.ttl
+  ### This language tag has not been removed somehow.
+  - sio:SIO_000300:
+    - inchikey_has_value: '"AAAHDTMMJGSHKG-UHFFFAOYSA-N"@en'
+  ## pc_inchikey2compound_*.ttl
+  - sio:SIO_000011:
+    - inchikey_is_attribute_of: PubChemCompound
+  ## pc_inchikey_topic.ttl
+  - dcterms:subject:
+    - inchikey_topic: mesh:M0000001
 ```
 
-# Formatting
+```
+- PubChemDisease disease:DZID2725:
+  - a: obo:DOID_4         # Disease
+  - a: obo:MONDO_0000001  # disease or disorder  ## Both of these are assinged.
+  - skos:prefLabel:
+    - disease_pref_label: "Chromosome 18 ring"
+  - skos:altLabel*:
+    - disease_alt_label: "ring 18 chromosome syndrome"
+  - skos:closeMatch*:
+    # UMLS, OMIM, Orphanet, MedGen, MeSH, GARD, NCIT, Mondo, DOID, HP
+    - disease_close_match: <https://uts.nlm.nih.gov/uts/umls/concept/C0265475>
+  - skos:relatedMatch*:
+    # UMLS, OMIM, Orphanet, MedGen, MeSH, GARD, NCIT, Mondo, DOID, HP
+    - disease_related_match: <https://uts.nlm.nih.gov/uts/umls/concept/C2931809>
+```
 
-This document use Markdown and you can look at [this tutorial](https://www.markdowntutorial.com/).
+  ```
+  - PubChemReference reference:PMID10021376:
+  ## pc_reference_contenttype.ttl
+  - prism:contentType:
+    - reference_content_type: "Letter"
+  ## pc_reference_title*.ttl
+  - dcterms:title:
+    - reference_title: '"Intracellular signalling: PDK1--a kinase at the hub of things"@en'
+  ## pc_reference2chemical_disease*.ttl
+  - cito:discusses*:
+    - reference_discusses: <http://id.nlm.nih.gov/mesh/M0011758>
+  ## pc_reference_citation*.ttl
+  - dcterms:bibliographicCitation:
+    - reference_bibliographic_citation: "C Belham, S Wu, J Avruch; Current biology : CB; 1999 Feb; 9(3):R93-6"
+  ## pc_reference_date.ttl
+  - dcterms:date:
+    - reference_date: 1999-02-11-04:00
+  ## pc_reference_author*.ttl
+  - dcterms:creator:
+    - reference_creator: PubChemAuthor
+  ## pc_reference2meshheading*.ttl
+  - fabio:hasSubjectTerm*:
+    - reference_subject_term: <http://id.nlm.nih.gov/mesh/D000818>
+  ## pc_reference2meshheading_primary
+  - fabio:hasPrimarySubjectTerm*:
+    - reference_primary_subject_term: <http://id.nlm.nih.gov/mesh/D011499>
+  ## pc_reference_discusses_by_textming_*.ttl
+  - vocab:discussesAsDerivedByTextMining*:
+    - reference_disscusses_as_derived_by_text_mining: [PubChemCompound, PubChemGene, PubChemDisease]
+  ## pc_reference_startingpage*.ttl
+  - prism:startingPage:
+    - reference_starting_page: "2667"
+  ## pc_reference_endingpage*.ttl
+  - prism:endingPage:
+    - reference_ending_page: "2691"
+  ## pc_reference_pagerange*.ttl
+  - prism:pageRange:
+    - reference_page_range: "2667-2691"
+  ## pc_reference_fundingagency*.ttl
+  - frapo:hasFundingAgency:
+    - reference_funding_agency: PubChemOrganization
+  ## pc_reference_grant*.ttl
+  - frapo:isSupportedBy:
+    - reference_grant: PubChemGrant
+  ## pc_reference_identifier*.ttl
+  ### Can dcterms:identifer have a URI as an object?
+  - dcterms:identifier:
+    - reference_identifier: <https://doi.org/10.2210/pdb4pwh/>
+  ## pc_reference_issn*.ttl
+  - prism:issn:
+    - reference_issn: "1756-6606"
+  ## pc_reference_issue*.ttl
+  - prism:issueIdentifier:
+    - reference_issue_identifier: "1"
+  ## pc_reference_journal_book*.ttl
+  - dcterms:isPartOf:
+    - reference_journal_book: [PubChemJournal, PubChemBook]
+  ## pc_reference_lang*.ttl
+  - dcterms:language:
+    - reference_language: "English"
+  ## pc_reference_publication*.ttl
+  - prism:publicationName:
+    - reference_publication: "American Journal of Potato Research"
+  ## pc_reference_source*.ttl
+  - dcterms:source:
+    - reference_source: <https://pubmed.ncbi.nlm.nih.gov/>
+  ```
 
-## Subsection level 2
+ - MESH concept layer, headings, Links are explained in PubChem documentation, where and how.
 
-Please keep sections to a maximum of only two levels.
-
-## Tables
-
+The use cases for this work are all resources collected 
 Tables can be added in the following way, though alternatives are possible:
 
 ```markdown
@@ -86,26 +220,9 @@ given before the table itself.
 
 | Header 1 | Header 2 |
 | -------- | -------- |
-| item 1 | item 2 |
-| item 3 | item 4 |
+| item 1   | item 2   |
+| item 3   | item 4   |
 
-## Figures
-
-A figure is added with:
-
-```markdown
-![Caption for BioHackrXiv logo figure](./biohackrxiv.png)
-```
-
-This gives:
-
-![Caption for BioHackrXiv logo figure](./biohackrxiv.png)
-
-Figures can be scaled by adding the width or height to the Markdown like this:
-
-```markdown
-![Caption for BioHackrXiv logo figure](./biohackrxiv.png){ width=50px }
-```
 
 # Other main section on your manuscript level 1
 
@@ -147,9 +264,7 @@ Possible CiTO typing annotation include:
 * updates
 * citation: generic citation
 
-
 # Results
-
 
 # Discussion
 
