@@ -11,7 +11,7 @@ tags:
 authors:
   - name: Javier Millán Acosta
     affiliation: 1
-    orcid:0000-0001-5608-781X
+    orcid: 0000-0001-5608-781X
   - name: Last Author
     orcid: 0000-0000-0000-0000
     affiliation: 2
