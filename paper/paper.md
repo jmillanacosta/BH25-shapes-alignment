@@ -54,7 +54,7 @@ Dataset providers often publish SPARQL examples, but these remain limited and fi
 
 Because of these factors, just knowing the used ontologies and text-based dataset documentation does not give a full picture of the actual graph. They do not reveal which classes are instantiated, how frequently properties occur for entities of a given OWL class, or where structural gaps appear. As a result, two datasets using the same ontology may have very different practical structures, and datasets using different ontologies may still have overlapping patterns that are not visible from documentation alone. This limits any attempt to assess interoperability without inspecting the concrete RDF graphs in detail.
 
-Earlier hackathon work showed that machine-readable Shape Language descriptions of RDF resources have potential to allow automatic discovery and matching of resources for data integration [@citesAsRelated:bh23Integration;@citesAsRelated:bh23Enhancement;@citesAsRelated:bh24Toward;@citesAsRelated:bh24Discovered;@citesAsRelated:fernandez-alvarez_extracting_2024]. However, their adoption in the life science RDF landscape is limited, leaving most graphs without shapes-based model descriptions.
+Earlier hackathon work showed that machine-readable Shape Language descriptions of RDF resources have potential to allow automatic discovery and matching of resources for data integration [@citesAsRelated:alvarez_biohack24_2024;@citesAsRelated:large24;@citesAsRelated:fernandez-alvarez_extracting_2024;@citesAsRelated:labra-gayo_rdf_2023]. However, their adoption in the life science RDF landscape is limited, leaving most graphs without shapes-based model descriptions.
 
 The main challenges in RDF schema matching and interoperability can be categorized into two key areas:
 
